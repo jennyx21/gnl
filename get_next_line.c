@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:27 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/11/27 15:38:27 by jtruckse         ###   ########.fr       */
+/*   Updated: 2025/11/27 22:32:17 by jennyx21         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
 char	*get_next_line(int fd)
 {
-	
+	// while (fd != '/n')
+    // read 
+	return (NULL);
 }
