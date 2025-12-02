@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:34 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/11/27 22:13:23 by jennyx21         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:32:13 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <string.h>
 # include <unistd.h>
 
-char	*get_next_line(int fd);
+#define BUFFERSIZE 42
+
+char	*get_next_line(int fd);_
 
 #endif

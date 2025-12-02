@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:27 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/11/27 22:32:17 by jennyx21         ###   ########.fr       */
+/*   Updated: 2025/12/02 16:32:57 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 char	*get_next_line(int fd)
 {
-	// while (fd != '/n')
-    // read 
+	static char		buffer[BUFFERSIZE + 1];
+	buffer = malloc((BUFFERSIZE + 1) * sizeof(char));
+
 	return (NULL);
 }
