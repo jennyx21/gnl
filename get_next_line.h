@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:34 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/02 16:32:13 by jtruckse         ###   ########.fr       */
+/*   Updated: 2025/12/02 23:48:03 by jennyx21         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 #define BUFFERSIZE 42
 
-char	*get_next_line(int fd);_
+char	*get_next_line(int fd);
+
+size_t	ft_strlen(const char *s);
 
 #endif
