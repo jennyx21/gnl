@@ -4,23 +4,29 @@
 
 int main(void)
 {
-    /*neheme die txt datei und lies daraus was drinn steht, 
-    wenn eine Zeil zu ende ist dann get die next line. 
-    
-    zu erst müssen wir die zeile lesen und diese muss dann in buffersize zwischen gespeichertwerden,
-    um dann den ganzen benöigten speicher zu alokieren. 
+    /*
+    neheme den input vom filedescriptor (fd) und lies daraus, bis zur buffer_size bzw. \n (newline), 
+    bei \n (ende der zeile) dann wiederholt sich die get_line loop. 
+    bei EOF (end of file) schliesst die loop ab und das programm endet.
 
-    wenn aber das file leer ist, muss eine error
+
+    zu erst müssen wir die zeile lesen, das gelesene wird in buffer zwischen gespeichert,
+    dann muss fuer die buffer_size (gelesene groesse) alloziert werden
+    dann den kopierten string aus dem buffer entfernen und in dem neuen string speichern.
+
+    wenn aber das file leer ist oder ein error passiert (malloc/calloc fail, read fail, etc) return NULL;
+
+
     */
     
     // char *str = "hallo";
     char buffer[15];
     buffer[0] = 'c';
 
-    // int fd = open("text.txt", O_RDONLY);
-    // char *nextline = get_next_line(fd);
-    // printf("line: %s", nextline);
-    // printf("%li", sizeof(buffer));
+    int fd = open("text.txt", O_RDONLY);
+    char *nextline = get_next_line(fd);
+    printf("line: %s", nextline);
+    printf("%li", sizeof(buffer));
     get_next_line(0);
     // close(fd); 
     return(0);

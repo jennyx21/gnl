@@ -3,28 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:27 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/03 00:00:08 by jennyx21         ###   ########.fr       */
+/*   Updated: 2025/12/03 19:53:56 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 char	*get_next_line(int fd)
-{ 
+{
 	char		*line;
-	int 		readchar;
+	int			charsread;
 	static char	buffer[BUFFERSIZE + 1];
 
-	while(!buffer)
-	read(fd, buffer, BUFFERSIZE);
-	while (buffer && buffer =='\n')
+	if (BUFFERSIZE <= 0 || fd < 0)
+		return (NULL);
+	charsread = read(fd, buffer, BUFFERSIZE);
+	line = ft_strdup(buffer);
+	if (line == 0)
+		get_next_line(fd);
 	
-	
-	ft_strlen(line)
-	
+
 
 
 
