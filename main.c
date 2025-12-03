@@ -20,14 +20,14 @@ int main(void)
     */
     
     // char *str = "hallo";
-    char buffer[15];
-    buffer[0] = 'c';
+    // char buffer[15];
+    // buffer[0] = 'c';
 
     int fd = open("text.txt", O_RDONLY);
     char *nextline = get_next_line(fd);
     printf("line: %s", nextline);
-    printf("%li", sizeof(buffer));
-    get_next_line(0);
+    // printf("%li", sizeof(buffer));
+    get_next_line(fd);
     // close(fd); 
     return(0);
 
