@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:09 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/03 23:43:13 by jtruckse         ###   ########.fr       */
+/*   Updated: 2025/12/04 22:59:34 by jennyx21         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,3 +100,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = '\0';
 	return (str);
 }
+
+
+char	*ft_strtrim(size_t len, char const *set)
+{
+	char	*goalstr;
+	int 	i;
+
+	i = 0;
+	goalstr = "";
+	if (!set)
+		return (NULL);
+	while (len && !ft_strchr(set, len))
+		{
+		goalstr[i] = set[len + i];
+		}
+	return (goalstr);
+}
+
+

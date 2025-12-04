@@ -22,15 +22,28 @@ int main(void)
     // char *str = "hallo";
     // char buffer[15];
     // buffer[0] = 'c';
+	int i = 5;
 
     int fd = open("text.txt", O_RDONLY);
+	while (i > 0)
+	{
     char *nextline = get_next_line(fd);
-    printf("line: %s", nextline);
-    // printf("%li", sizeof(buffer));
-    get_next_line(fd);
+    printf("line: %s\n", nextline);
+	get_next_line(fd);
+	i--;
+	}
     // close(fd); 
-    return(0);
+    // return(0);
 
+
+    // int fd = open("test.txt", O_RDONLY);
+    // char *line;
+
+    // while ((line = get_next_line(fd)))
+    // {
+    //     printf("%s", line);
+    // }
+    // return 0;
 
 
 }
