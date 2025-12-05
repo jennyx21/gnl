@@ -23,13 +23,13 @@ int main(void)
     // char buffer[15];
     // buffer[0] = 'c';
 	int i = 5;
+    char *nextline;
 
     int fd = open("text.txt", O_RDONLY);
 	while (i > 0)
 	{
-    char *nextline = get_next_line(fd);
+    nextline = get_next_line(fd);
     printf("line: %s\n", nextline);
-	get_next_line(fd);
 	i--;
 	}
     // close(fd); 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:27 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/04 23:43:14 by jennyx21         ###   ########.fr       */
+/*   Updated: 2025/12/05 16:51:04 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,34 +18,34 @@ char	*get_next_line(int fd)
 	int			charsread;
 	char		*lineplus = "";
 	size_t		length1;
-	char 		*res = "";
-
 	static char	buffer[BUFFERSIZE + 1];
 	char		*buf_ptr;
 
 	buf_ptr = buffer;
-
+	length1 = 0;
 	if (BUFFERSIZE <= 0 || fd < 0)
 		return (NULL);
-	if (strlen(res))
-		printf("rest: %s", res);
 	charsread = read(fd, buf_ptr, BUFFERSIZE);
+		printf("rest: %s\n", buffer);
 	line = malloc(charsread  + 1);
 	if (!line)
 		return (NULL);
 	line = ft_memcpy(line, buf_ptr, ft_strlennewlinechar(buf_ptr));
-	
-	if (ft_strchr(line, '\n') == 0)
-		
+	if (ft_strchr(line, '\n') == 0)	{length1 = ft_strlennewlinechar(line);
 		lineplus = ft_strjoin(lineplus, line);
+		printf("lineplus: %s\n", lineplus);}
+		
 	else if (ft_strchr(line, '\n') != 0)
 	{	
 		length1 = ft_strlennewlinechar(line);
-		lineplus = ft_memcpy(lineplus, line, length1);
+		lineplus = ft_memcpy(lineplus, line, length1);	
 	}
 	else 
 		return(0);
-	res = ft_strtrim(length1, line);
+	
+	ft_memmove(buffer, buffer + length1, 100);
+	
+	printf("rest2: %s\nlength1: %zu\n", buffer, length1);
 	free(line);
 	return (lineplus);
 }

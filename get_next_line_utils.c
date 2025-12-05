@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jennyx21 <jennyx21@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:09 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/04 22:59:34 by jennyx21         ###   ########.fr       */
+/*   Updated: 2025/12/05 15:56:21 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,20 +102,31 @@ char	*ft_strjoin(char const *s1, char const *s2)
 }
 
 
-char	*ft_strtrim(size_t len, char const *set)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	char	*goalstr;
-	int 	i;
+	unsigned char	*ptrsrc;
+	unsigned char	*ptrdest;
+	size_t			i;
 
+	ptrsrc = (unsigned char *)src;
+	ptrdest = (unsigned char *)dest;
 	i = 0;
-	goalstr = "";
-	if (!set)
-		return (NULL);
-	while (len && !ft_strchr(set, len))
+	if (!dest && !src)
+		return (dest);
+	while (i < n)
+	{
+		if (ptrsrc < ptrdest)
 		{
-		goalstr[i] = set[len + i];
+			n--;
+			ptrdest[n] = ptrsrc[n];
 		}
-	return (goalstr);
+		else
+		{
+			ptrdest[i] = ptrsrc[i];
+			i++;
+		}
+	}
+	return (dest);
 }
 
 
