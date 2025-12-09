@@ -6,14 +6,14 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:34 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/05 15:35:32 by jtruckse         ###   ########.fr       */
+/*   Updated: 2025/12/08 16:01:28 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFERSIZE
-#  define BUFFERSIZE 42
+#  define BUFFERSIZE 10
 # endif
 # include <stdio.h>
 # include <stdlib.h>
