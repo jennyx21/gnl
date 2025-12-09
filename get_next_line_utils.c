@@ -6,7 +6,7 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:09 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/08 18:54:08 by jtruckse         ###   ########.fr       */
+/*   Updated: 2025/12/09 19:44:52 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,24 @@ size_t	ft_strlennewlinechar(const char *s)
 }
 
 
-void	*ft_memcpy(void *dest, const void *src, size_t n)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	size_t	i;
-	char	*ptr;
-	char	*ptr2;
+	size_t			i;
+	const char		*ptrsrc;
+	unsigned char	*ptrdest;
 
 	i = 0;
-	ptr = (char *)src;
-	ptr2 = (char *)dest;
-	if (!src && !dest)
-		return (NULL);
-	while (i < n)
-	{
-		ptr2[i] = ptr[i];
-		i++;
-	}
+	ptrsrc = src;
+	ptrdest = (unsigned char *)dest;
+	
+		while (src[i] != '\0' && src[i-1] != '\n')
+		{
+			ptrdest[i] = ptrsrc[i];
+			i++;
+		}
+		dest[i] = '\0';
 	return (dest);
 }
-
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -98,6 +97,9 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	str[i] = '\0';
+	printf("strjoin s1 input = %s\n", s1);
+	printf("strjoin s2 input = %s\n", s2);
+	fflush(stdout);
 	return (str);
 }
 
@@ -122,6 +124,10 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 		}
 		else
 		{
+
+
+			printf("bevore strchr\n");
+			fflush(stdout);
 			ptrdest[i] = ptrsrc[i];
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:27 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/08 18:52:16 by jtruckse         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:39:29 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	int			rest_len;
 	int			charsread;
 	char		*lineplus = "";
 	size_t		length1;
@@ -45,11 +44,10 @@ char	*get_next_line(int fd)
 		length1 = ft_strlennewlinechar(line);
 		lineplus = ft_memmove(lineplus, line, length1);	
 	}
-	rest_len = ft_strlennewlinechar(buffer);
-	printf("buffer: %s\n", buffer);
-	ft_memmove(buffer, buffer + length1, rest_len);
-	buffer[rest_len] = '\0';
 	
+	// printf("buffer: %s\n", buffer);
+
+	ft_strcpy(ft_strchr(line, '\n') + 1, buffer);
 	//printf("rest2: %s\nlength1: %zu\n", buffer, length1);
 	free(line);
 	return (lineplus);
