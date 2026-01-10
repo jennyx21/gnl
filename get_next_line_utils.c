@@ -6,55 +6,54 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:09 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/09 19:44:52 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/10 17:23:53 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_len_to_char(const char *s, char c)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\0')
-	{
+	if(!s)
+		return(0);
+	while (s[i] && s[i] != c)
 		i++;
-	}
+	if(s[i] == '\n' && c == '\n')
+		i++;
 	return (i);
 }
 
-size_t	ft_strlennewlinechar(const char *s)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
+	char	*str;
+	size_t	len1;
+	size_t	len2;
+	int		i;
 
-	i = 0;
-	while (s[i] != '\0' && s[i] != '\n')
-	{
-		i++;
-	}
-	return (i);
+	if(!s1 && !s2)
+		return(0);
+	if(!s1)
+		return(ft_strdup(s2));
+	if(!s2)
+	 return(ft_strdup(s1));
+	len1 = ft_len_to_char(s1, '\0');
+	len2 = ft_len_to_char(s2, '\0');
+	str = malloc((len1 + len2 + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (s1[i++])
+		str[i] = s1[i];
+	i = -1;
+	while (s2[i++])
+		str[len1 + i] = s2[i];
+	str[i] = '\0';
+	return (str);
 }
 
-
-char	*ft_strcpy(char *dest, const char *src)
-{
-	size_t			i;
-	const char		*ptrsrc;
-	unsigned char	*ptrdest;
-
-	i = 0;
-	ptrsrc = src;
-	ptrdest = (unsigned char *)dest;
-	
-		while (src[i] != '\0' && src[i-1] != '\n')
-		{
-			ptrdest[i] = ptrsrc[i];
-			i++;
-		}
-		dest[i] = '\0';
-	return (dest);
-}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -72,67 +71,44 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
-	size_t	len1;
-	size_t	len2;
-	int		i;
+	size_t	i;
+	char	*result;
 
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	str = malloc((len1 + len2 + 1) * sizeof(char));
-	if (!str)
+	i = -1;
+	if (!s)
+		return (NULL);
+	if (start > ft_len_to_char(s, '\0'))
+		return (result = ft_strdup(""));
+	if (len > ft_len_to_char(s, '\0') - start)
+		len = ft_len_to_char(s, '\0') - start;
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	while (++i < len)
+		result[i] = s[start + i];
+	result[i] = '\0';
+	return (result);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*restult;
+	size_t len;
+	size_t i;
+
+	len = ft_len_to_char(s, '\0');
+	restult = malloc(len + 1);
+	if (!restult)
 		return (NULL);
 	i = 0;
-	while (s1[i])
+	while (i < len)
 	{
-		str[i] = s1[i];
+		restult[i] = s[i];
 		i++;
 	}
-	while (s2[i - len1])
-	{
-		str[i] = s2[i - len1];
-		i++;
-	}
-	str[i] = '\0';
-	printf("strjoin s1 input = %s\n", s1);
-	printf("strjoin s2 input = %s\n", s2);
-	fflush(stdout);
-	return (str);
+	restult[i] = '\0';
+	return (restult);
 }
-
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	unsigned char	*ptrsrc;
-	unsigned char	*ptrdest;
-	size_t			i;
-
-	ptrsrc = (unsigned char *)src;
-	ptrdest = (unsigned char *)dest;
-	i = 0;
-	if (!dest && !src)
-		return (dest);
-	while (i < n)
-	{
-		if (ptrsrc < ptrdest)
-		{
-			n--;
-			ptrdest[n] = ptrsrc[n];
-		}
-		else
-		{
-
-
-			printf("bevore strchr\n");
-			fflush(stdout);
-			ptrdest[i] = ptrsrc[i];
-			i++;
-		}
-	}
-	return (dest);
-}
-
 

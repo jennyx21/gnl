@@ -6,7 +6,7 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:34 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/09 19:38:24 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/09 19:35:19 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
-size_t	ft_strlennewlinechar(const char *s);
+size_t	ft_len_to_char(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_strcpy(char *dest, const char *src);
-void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*ft_strchr(const char *s, int c);
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_strdup(const char *s)
 #endif
