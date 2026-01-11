@@ -6,7 +6,7 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:09 by jtruckse          #+#    #+#             */
-/*   Updated: 2026/01/10 17:23:53 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/11 14:26:40 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	i = -1;
-	while (s1[i++])
+	while (s1[++i])
 		str[i] = s1[i];
 	i = -1;
-	while (s2[i++])
+	while (s2[++i])
 		str[len1 + i] = s2[i];
 	str[i] = '\0';
 	return (str);

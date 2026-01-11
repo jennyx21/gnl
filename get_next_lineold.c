@@ -6,50 +6,102 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:27 by jtruckse          #+#    #+#             */
-/*   Updated: 2025/12/09 18:39:29 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/11 15:55:30 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+int handle_rest_in_buff(char *buffer, char **line);
+int read_line(int fd, char *buffer, char **line);
+void move_buf_to_nl(char *buffer, size_t len);
+
+
+char *get_next_line(int fd)
 {
-	char		*line;
-	int			charsread;
-	char		*lineplus = "";
-	size_t		length1;
-	static char	buffer[BUFFERSIZE + 1];
-	char		*buf_ptr;
-
-	buf_ptr = buffer;
-	length1 = 0;
-	if (BUFFERSIZE <= 0 || fd < 0)
-		return (NULL);
-	charsread = read(fd, buffer, BUFFERSIZE);
-		//printf("rest: %s\n", buffer);
-	line = malloc(charsread  + 1);
-	if (!line)
-		return (NULL);
-	line = ft_memmove(line, buf_ptr, ft_strlennewlinechar(buf_ptr));
-	line[ft_strlennewlinechar(buf_ptr)] = '\0';
-	if (ft_strchr(line, '\n') == 0)	
-	{
-		length1 = ft_strlennewlinechar(line);
-		//printf("lineplus: %s\n", lineplus);
-		lineplus = ft_strjoin(lineplus, line);
-		//printf("lineplus: %s\n", lineplus);
-	}
-	else 
-	{	
-		length1 = ft_strlennewlinechar(line);
-		lineplus = ft_memmove(lineplus, line, length1);	
-	}
-	
-	// printf("buffer: %s\n", buffer);
-
-	ft_strcpy(ft_strchr(line, '\n') + 1, buffer);
-	//printf("rest2: %s\nlength1: %zu\n", buffer, length1);
-	free(line);
-	return (lineplus);
+    static char buffer[BUFFERSIZE + 1];
+    char        *line;
+    int         result;
+    
+    if (BUFFERSIZE <= 0 || fd < 0)
+        return (NULL);
+    line = NULL;
+    if (buffer[0] != '\0')
+    {
+        if (handle_rest_in_buff(buffer, &line) == 1)
+            return (line);
+    }
+    while (1)
+    {
+        result = read_line(fd, buffer, &line);
+        if (result == 1)
+            return (line);
+		if (result == 0)
+        {
+            if (line && line[0] != '\0')
+                return (line);
+            return (NULL);
+        }
+    }
 }
 
+int read_line(int fd, char *buffer, char **line)
+{
+    ssize_t charsread;
+    size_t  len_nl;
+    char    *temp;
+    char    *temp2;
+
+    charsread = read(fd, buffer, BUFFERSIZE);
+    if (charsread <= 0)
+        return (0);
+    buffer[charsread] = '\0';
+    if (!ft_strchr(buffer, '\n'))
+    {
+        temp = ft_strjoin(*line, buffer);
+        free(*line);
+        *line = temp;
+        buffer[0] = '\0';
+        return (2);
+    }
+    len_nl = ft_len_to_char(buffer, '\n');
+    temp = ft_substr(buffer, 0, len_nl + 1);
+    temp2 = ft_strjoin(*line, temp);
+    free(*line);
+    free(temp);
+    *line = temp2;
+    move_buf_to_nl(buffer, len_nl);
+    return (1);
+}
+
+void move_buf_to_nl(char *buffer, size_t len)
+{
+    size_t i;
+
+    i = 0;
+    while (buffer[len + i]) 
+    {
+        buffer[i] = buffer[len + i];
+        i++;
+    }
+    buffer[i] = '\0';
+}
+
+int handle_rest_in_buff(char *buffer, char **line)
+{
+    size_t i;
+
+    if (!ft_strchr(buffer, '\n'))
+    {
+        *line = ft_strdup(buffer);
+        buffer[0] = '\0';
+        return (0);
+    }
+    i = ft_len_to_char(buffer, '\n');
+    *line = ft_substr(buffer, 0, i + 1);
+    if (!*line)
+        return (0);
+    move_buf_to_nl(buffer, i);
+    return (1);
+}

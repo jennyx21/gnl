@@ -6,11 +6,15 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:29:40 by jtruckse          #+#    #+#             */
-/*   Updated: 2026/01/10 18:34:34 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/11 16:05:34 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int handle_rest_in_buff(char *buffer, char **line);
+int read_line(int fd, char *buffer, char **line);
+void move_buf_to_nl(char *buffer, size_t len);
 
 char	*get_next_line(int fd)
 {
@@ -22,53 +26,79 @@ char	*get_next_line(int fd)
 		return(0);
 	line = NULL;
 	if(buffer[0] != '\0')
-		line = handle_rest_in_buff(buffer, &line);
-	while(1){
-	result = read_line(fd, buffer, &line);
-	if(result == 0)
-		return (0);
-	if(result == 1)
-		return(line );}
-	return(0);
+	{
+		if(handle_rest_in_buff(buffer, &line) == 1)
+		return(line);
+	}
+	while(1)
+	{
+		result = read_line(fd, buffer, &line);
+		if(result == 1)
+			return(line);
+		if(result == 0)
+		{
+			if(line && line[0] != '\0')
+				return(line);
+			return (NULL);
+		}
+	}
 }
 
 int read_line(int fd, char *buffer, char **line)
 {
 	size_t charsread;
 	size_t len_nl;
+	char *temp;
 
 	charsread = read(fd, buffer, BUFFERSIZE);
 	if (charsread <= 0)
 		return(0);
 	buffer[charsread] = '\0';
-	*line = malloc(charsread + 1);
-	if (!*line)
-		return(0);
 	if (!ft_strchr(buffer, '\n'))
 	{
-		line = ft_strjoin(*line, buffer);
-		buffer[0] = '\0'
+		temp = ft_strjoin(*line, buffer);
+		free(*line);
+		*line = temp;
+		buffer[0] = '\0';
 		return(2);
 	}
-	else
-	{
-		len_nl = ft_len_to_char(buffer, "\n");
-		line = ft_strjoin(line, ft_substr(buffer, 0, len_nl + 1));
-		buffer = move_buf_to_nl(buffer, ft_len_to_char(buffer, '\0'));
-		return (1);
-	}
-	return(0);
+	len_nl = ft_len_to_char(buffer, '\n');
+	temp = ft_substr(buffer, 0, len_nl + 1);
+	*line = ft_strjoin(*line, temp);
+	free(temp);
+	move_buf_to_nl(buffer, ft_len_to_char(buffer, '\n'));
+	return (1);
 }
 
-char move_buf_to_nl(char *buffer, size_t len)
+void move_buf_to_nl(char *buffer, size_t len)
+{
+	size_t i;
+
+	i = 0;
+	while(buffer[i + 1 + len])
+	{
+		buffer[i] = buffer[len + i + 1];
+		i++;
+	}
+	buffer[i] = '\0';
+}
+
+int handle_rest_in_buff(char *buffer, char **line)
 {
 	int i;
 
 	i = 0;
-	while(buffer[i + len] && i <= len)
+	*line = malloc(ft_len_to_char(buffer, '\n') + 1);
+	while(buffer[i] && buffer[i] != '\n')
 	{
-		buffer[i] = buffer[len + 1]
+		*(line)[i] = buffer[i];
 		i++;
 	}
-	buffer[i] = '\0'
+	if(buffer[i] == '\n')
+	{
+		*line[i] = '\0';
+		move_buf_to_nl(buffer, i);
+		return(1);
+	}
+	return(0);
 }
