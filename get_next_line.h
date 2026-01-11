@@ -6,7 +6,7 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 15:36:34 by jtruckse          #+#    #+#             */
-/*   Updated: 2026/01/11 21:05:24 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/11 22:29:24 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 10
 # endif
 
 char	*get_next_line(int fd);

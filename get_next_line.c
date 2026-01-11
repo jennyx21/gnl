@@ -6,12 +6,11 @@
 /*   By: jtruckse <jtruckse@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 17:29:40 by jtruckse          #+#    #+#             */
-/*   Updated: 2026/01/11 21:03:33 by jtruckse         ###   ########.fr       */
+/*   Updated: 2026/01/11 22:27:36 by jtruckse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <limits.h>
 
 int		handle_rest_in_buff(char *buffer, char **line);
 int		read_line(int fd, char *buffer, char **line);
@@ -80,7 +79,7 @@ void	move_buf_to_nl(char *buffer, size_t len)
 	size_t	i;
 
 	i = 0;
-	while (buffer[i  + len])
+	while (buffer[i + len])
 	{
 		buffer[i] = buffer[len + i];
 		i++;
@@ -94,6 +93,8 @@ int	handle_rest_in_buff(char *buffer, char **line)
 
 	i = 0;
 	*line = malloc(ft_len_to_char(buffer, '\n') + 1);
+	if (!*line)
+		return (0);
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		(*line)[i] = buffer[i];
